@@ -77,6 +77,36 @@ export class CbController {
           ),
       );
       return data;
+    } else if (body.type === 'credit') {
+      const { data } = await firstValueFrom(
+        this.httpService
+          .post(
+            `${process.env.API_MAIN_BACKEND_URI}v1/user/fundist/credit-user`,
+            body,
+          )
+          .pipe(
+            catchError((error: AxiosError) => {
+              this.logger.error(error.response?.data || error.message);
+              throw new Error('An error occurred while crediting user');
+            }),
+          ),
+      );
+      return data;
+    } else if (body.type === 'debit') {
+      const { data } = await firstValueFrom(
+        this.httpService
+          .post(
+            `${process.env.API_MAIN_BACKEND_URI}v1/user/fundist/debit-user`,
+            body,
+          )
+          .pipe(
+            catchError((error: AxiosError) => {
+              this.logger.error(error.response?.data || error.message);
+              throw new Error('An error occurred while debit user');
+            }),
+          ),
+      );
+      return data;
     }
   }
 }
