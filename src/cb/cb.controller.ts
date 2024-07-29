@@ -76,7 +76,7 @@ export class CbController {
             }),
           ),
       );
-      this.logger.log(data);
+      this.logger.log('balance request response:', data);
       return data;
     } else if (body.type === 'credit') {
       const { data } = await firstValueFrom(
@@ -92,7 +92,7 @@ export class CbController {
             }),
           ),
       );
-      this.logger.log(data);
+      this.logger.log('credit request response:', data);
       return data;
     } else if (body.type === 'debit') {
       const { data } = await firstValueFrom(
@@ -108,7 +108,7 @@ export class CbController {
             }),
           ),
       );
-      this.logger.log(data);
+      this.logger.log('debit request response:', data);
       return data;
     }
   }
