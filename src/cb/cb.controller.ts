@@ -76,6 +76,7 @@ export class CbController {
             }),
           ),
       );
+      this.logger.log(data);
       return data;
     } else if (body.type === 'credit') {
       const { data } = await firstValueFrom(
@@ -91,6 +92,7 @@ export class CbController {
             }),
           ),
       );
+      this.logger.log(data);
       return data;
     } else if (body.type === 'debit') {
       const { data } = await firstValueFrom(
@@ -106,6 +108,7 @@ export class CbController {
             }),
           ),
       );
+      this.logger.log(data);
       return data;
     }
   }
