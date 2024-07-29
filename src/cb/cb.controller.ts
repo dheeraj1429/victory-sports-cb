@@ -67,7 +67,7 @@ export class CbController {
       const { data } = await firstValueFrom(
         this.httpService
           .get(
-            `${process.env.API_MAIN_BACKEND_URI}v1/user/fundist/get-user-blc?userId=${body.userid}&currency=${body.currency}`,
+            `${process.env.API_MAIN_BACKEND_URI}v1/user/fundist/get-user-blc?userid=${body.userid}&currency=${body.currency}`,
           )
           .pipe(
             catchError((error: AxiosError) => {
