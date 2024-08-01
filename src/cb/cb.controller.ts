@@ -10,7 +10,7 @@ import {
 import { AxiosError } from 'axios';
 import { catchError, firstValueFrom } from 'rxjs';
 
-type RequestType = 'balance' | 'debit' | 'credit';
+type RequestType = 'balance' | 'debit' | 'credit' | 'ping';
 
 interface BalancePayload {
   userid: string;
@@ -109,6 +109,19 @@ export class CbController {
           ),
       );
       this.logger.log('debit request response:', data);
+      return data;
+    } else if (body.type === 'ping') {
+      const { data } = await firstValueFrom(
+        this.httpService
+          .get(`${process.env.API_MAIN_BACKEND_URI}v1/user/fundist/ping`)
+          .pipe(
+            catchError((error: AxiosError) => {
+              this.logger.error(error.response?.data || error.message);
+              throw new Error('An error occurred while debit user');
+            }),
+          ),
+      );
+      this.logger.log('ping request response:', data);
       return data;
     }
   }
